@@ -25,10 +25,19 @@ func (nn *NeuralNetwork) Predict(input []float64) []float64 {
 	return output
 }
 
-// Function for printing structure of neural network. This is first iteration, so print will be
-// rough and kind of uninformative.
+// Function for printing structure of neural network for debugging and checking that everything works.
+// Will be refined later to be more informative and visually nicer :)
 func (nn *NeuralNetwork) PrintLayers() {
+	fmt.Print("Amount of neurons in each layer in the neural network: \n")
 	for layer := range nn.Layers {
-		fmt.Print(nn.Layers[layer].length())
+		fmt.Print("layer ", layer, ": ", nn.Layers[layer].Length(), "\n")
 	}
+}
+
+// Constructor for neural network
+func NewNeuralNetwork(layers []Layer) *NeuralNetwork {
+	temp := &NeuralNetwork{
+		Layers: layers,
+	}
+	return temp
 }

@@ -24,6 +24,14 @@ func (l *Layer) Forward(inputs []float64) []float64 {
 }
 
 // Function for counting neurons in given layer
-func (l *Layer) length() int {
+func (l *Layer) Length() int {
 	return len(l.Neurons)
+}
+
+// Constructor for new layers
+func NewLayer(neurons []Neuron) *Layer {
+	temp := &Layer{
+		Neurons: neurons,
+	}
+	return temp
 }

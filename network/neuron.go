@@ -33,3 +33,13 @@ func (n *Neuron) Activate(inputs []float64) float64 {
 	// applies activation function to the sum and returns the value
 	return n.ActivationFunction(sum)
 }
+
+// Creating constructor so we can create neurons
+func NewNeuron(biasTerm float64, activationFunction func(float64) float64, weights []float64) *Neuron {
+	temp := &Neuron{
+		BiasTerm:           biasTerm,
+		ActivationFunction: activationFunction,
+		Weights:            weights,
+	}
+	return temp
+}
