@@ -7,7 +7,7 @@ import "fmt"
 
 // NeuralNetwork consists of layers of neurons. It has no adjustable parameters other than layers.
 type NeuralNetwork struct {
-	Layers []Layer
+	Layers []*Layer
 }
 
 // Creating a function for single forward pass.
@@ -17,6 +17,8 @@ func (nn *NeuralNetwork) Predict(input []float64) []float64 {
 	// Creating a slice output, that will keep the output values of last processed layer. Starting
 	// with input, as it is what comes before first layer.
 	output := input
+
+	fmt.Print("inputs: ", input, "\n")
 
 	// Loop through all the layers in the neural network updating outputs as we move through layers
 	for _, layer := range nn.Layers {
@@ -35,7 +37,7 @@ func (nn *NeuralNetwork) PrintLayers() {
 }
 
 // Constructor for neural network
-func NewNeuralNetwork(layers []Layer) *NeuralNetwork {
+func NewNeuralNetwork(layers []*Layer) *NeuralNetwork {
 	temp := &NeuralNetwork{
 		Layers: layers,
 	}

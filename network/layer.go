@@ -3,23 +3,26 @@
 // I have also commented everything manually to understand the code and to make it understandable
 package network
 
+import "fmt"
+
 // Defining struct layer. Layer only consists of neurons, and has no
 // other fields or information to it
 type Layer struct {
-	Neurons []Neuron
+	Neurons []*Neuron
 }
 
 // Defining function Forward. This function gets layer method receiver that it
 // uses to access other layers in the neural network. It takes inputs as
 // parameter and returns list of outputs, one float64 for each output connection
 func (l *Layer) Forward(inputs []float64) []float64 {
-	// Make a slice of output that consists of lists of outputs for each neuron
+	// defining outputs as empty slice with correct capacity
 	outputs := make([]float64, len(l.Neurons))
 	// Loops over each neuron in l.Neurons, adds result of activation to
 	// each neurons output.
 	for i, neuron := range l.Neurons {
 		outputs[i] = neuron.Activate(inputs)
 	}
+	fmt.Print("Outputs: ", outputs, "\n")
 	return outputs
 }
 
@@ -29,7 +32,7 @@ func (l *Layer) Length() int {
 }
 
 // Constructor for new layers
-func NewLayer(neurons []Neuron) *Layer {
+func NewLayer(neurons []*Neuron) *Layer {
 	temp := &Layer{
 		Neurons: neurons,
 	}

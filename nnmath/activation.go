@@ -3,10 +3,14 @@
 // my bachelors thesis about deep neural networks with focus on activation functions.
 package nnmath
 
+import "fmt"
+
 func ReLU(x float64) float64 {
 	if x < 0 {
+		fmt.Print("Relu called with value: ", x, "\n")
 		return 0
 	} else {
+		fmt.Print("Relu called with value: ", x, "\n")
 		return x
 	}
 
