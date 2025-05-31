@@ -1,5 +1,5 @@
 // This class is for utils like randomization, normalization, etc.
-package math
+package nnmath
 
 import "fmt"
 
