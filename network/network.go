@@ -36,6 +36,14 @@ func (nn *NeuralNetwork) PrintLayers() {
 	}
 }
 
+func (nn *NeuralNetwork) AdjustWeights(layer int, node int, newWeighNumber int, newWeightValue float64, newBias float64) {
+	fmt.Print("Before setting weights: \n")
+	nn.Layers[layer].Neurons[node].PrintNeuronsWeights()
+	nn.Layers[layer].Neurons[node].SetWeight(newWeighNumber, newWeightValue, newBias)
+	fmt.Print("After setting weights: \n")
+	nn.Layers[layer].Neurons[node].PrintNeuronsWeights()
+}
+
 // Constructor for neural network
 func NewNeuralNetwork(layers []*Layer) *NeuralNetwork {
 	temp := &NeuralNetwork{

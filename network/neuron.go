@@ -3,6 +3,8 @@
 // I have also commented everything manually to understand the code and to make it understandable
 package network
 
+import "fmt"
+
 // Each neuron remembers all the INCOMING weights, and only outputs single value.
 
 // Creating base struct for neuron. Bias term and weights are the parameters
@@ -42,4 +44,25 @@ func NewNeuron(biasTerm float64, activationFunction func(float64) float64, weigh
 		Weights:            weights,
 	}
 	return temp
+}
+
+// Creating functio for changing weights. This will just set weight as given value, and should not be used
+// other than for testing purposes
+func (n *Neuron) SetWeight(newWeightNumber int, newWeightValue float64, newBias float64) {
+	// Only set weight if new value isn't 0, this allows only setting bias term and keeping weight untouched
+	if newWeightValue != 0 {
+		n.Weights[newWeightNumber] = newWeightValue
+	}
+	// Only set bias term if new value isn't 0, this allows only setting weight and keeping bias term untouched
+	if newBias != 0 {
+		n.BiasTerm = newBias
+	}
+}
+
+// Method for printing all the weights of single node. This is for debugging and testing purposes and should not
+// be used during training or use of model
+func (n *Neuron) PrintNeuronsWeights() {
+	for i := 0; i < len(n.Weights); i++ {
+		fmt.Print(n.Weights[i], "\n")
+	}
 }
