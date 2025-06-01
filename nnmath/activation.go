@@ -5,6 +5,12 @@ package nnmath
 
 import "fmt"
 
+var ActivationFunctions = map[string]func(float64) float64{
+	"relu":   ReLU,
+	"linear": linear,
+	"lrelu":  LReLU,
+}
+
 func ReLU(x float64) float64 {
 	if x < 0 {
 		fmt.Print("Relu called with value: ", x, "\n")
