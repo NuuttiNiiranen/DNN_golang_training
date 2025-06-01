@@ -3,7 +3,10 @@
 // I have also commented everything manually to understand the code and to make it understandable
 package network
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 // NeuralNetwork consists of layers of neurons. It has no adjustable parameters other than layers.
 type NeuralNetwork struct {
@@ -50,4 +53,14 @@ func NewNeuralNetwork(layers []*Layer) *NeuralNetwork {
 		Layers: layers,
 	}
 	return temp
+}
+
+func (nn *NeuralNetwork) Jsonify() []byte {
+	b, err := json.MarshalIndent(nn, "", "  ")
+	if err == nil {
+		return b
+	} else {
+		fmt.Print("Error in jsonify - message from network.go")
+		return nil
+	}
 }

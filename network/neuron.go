@@ -3,7 +3,10 @@
 // I have also commented everything manually to understand the code and to make it understandable
 package network
 
-import "fmt"
+import (
+	"dnn_golang_training/nnmath"
+	"fmt"
+)
 
 // Each neuron remembers all the INCOMING weights, and only outputs single value.
 
@@ -11,9 +14,10 @@ import "fmt"
 // for each neuron and activation function is the activation function chosen
 // for the neuron. Activation function is chosen here, as I want to be able to
 // change it for each neuron.
+
 type Neuron struct {
 	BiasTerm           float64
-	ActivationFunction func(float64) float64
+	ActivationFunction string
 	Weights            []float64
 }
 
@@ -33,11 +37,12 @@ func (n *Neuron) Activate(inputs []float64) float64 {
 	// Adds bias term to the sum
 	sum += n.BiasTerm
 	// applies activation function to the sum and returns the value
-	return n.ActivationFunction(sum)
+	activationFunc := nnmath.ActivationFunctions[n.ActivationFunction]
+	return activationFunc(sum)
 }
 
 // Creating constructor so we can create neurons
-func NewNeuron(biasTerm float64, activationFunction func(float64) float64, weights []float64) *Neuron {
+func NewNeuron(biasTerm float64, activationFunction string, weights []float64) *Neuron {
 	temp := &Neuron{
 		BiasTerm:           biasTerm,
 		ActivationFunction: activationFunction,
