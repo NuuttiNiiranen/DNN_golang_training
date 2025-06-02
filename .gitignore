@@ -8,6 +8,9 @@
 *.so
 *.dylib
 
+# Ignore built models as it makes no sense to push entire dnn model to github
+models
+
 # Test binary, built with `go test -c`
 *.test
 

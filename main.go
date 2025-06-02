@@ -24,7 +24,7 @@ func main() {
 	// } else {
 	// 	fmt.Print("Saving succesful!")
 	// }
-	byteText, err := LoadFileIfExists("FirstModel")
+	byteText, err := LoadFileIfExists("models/FirstModel")
 	if err != nil {
 		fmt.Print(err)
 	}
