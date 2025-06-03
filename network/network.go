@@ -39,6 +39,8 @@ func (nn *NeuralNetwork) PrintLayers() {
 	}
 }
 
+// Function for adjusting single weight of single neuron in neural network. This is purely for testing and learning
+// and should never be used with real neural network (as it does hard reset the weight to given value)
 func (nn *NeuralNetwork) AdjustWeights(layer int, node int, newWeighNumber int, newWeightValue float64, newBias float64) {
 	fmt.Print("Before setting weights: \n")
 	nn.Layers[layer].Neurons[node].PrintNeuronsWeights()
@@ -55,7 +57,9 @@ func NewNeuralNetwork(layers []*Layer) *NeuralNetwork {
 	return temp
 }
 
+// Function to transform neural network into []byte slice for easy saving and transportation
 func (nn *NeuralNetwork) Jsonify() []byte {
+	// Using Marshal to transform data as I didn't want data to be go-specific
 	b, err := json.MarshalIndent(nn, "", "  ")
 	if err == nil {
 		return b
@@ -63,4 +67,16 @@ func (nn *NeuralNetwork) Jsonify() []byte {
 		fmt.Print("Error in jsonify - message from network.go")
 		return nil
 	}
+}
+
+// A function that takes []byte and returns actual neural network, this can be used
+// in a combination with fileloader to get jsonfile -> neural network
+func LoadNeuralNetworkFromJSON(jsonBytes []byte) *NeuralNetwork {
+	var nn NeuralNetwork
+	err := json.Unmarshal(jsonBytes, &nn)
+	if err != nil {
+		fmt.Println("Error unmarshaling NeuralNetwork:", err)
+		return nil
+	}
+	return &nn
 }
